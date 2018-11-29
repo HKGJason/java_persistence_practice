@@ -15,14 +15,18 @@ public class EmployeeResource {
 
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @GetMapping(produces = {"application/json"})
     public List<Employee> list() {
-        return employeeService.list();
+        //return employeeService.list();
+        return (List<Employee>) employeeRepository.findAll();
     }
 
     @PostMapping(produces = {"application/json"})
     public void add(@RequestBody Employee employee) {
-        employeeService.add(employee);
+        //employeeService.add(employee);
+        employeeRepository.save(employee);
     }
 }
